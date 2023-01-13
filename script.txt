@@ -1,0 +1,29 @@
+var unread      = API.messages.getConversations({"filter":"unread"});
+var blocked     = API.account.getBanned();
+var friends     = API.friends.get();
+var friends_req = API.friends.getRequests({"need_viewed":true});
+
+var user      = API.users.get({"fields":"online,last_seen,screen_name"})[0];
+var last_seen = user.last_seen;
+
+var online_bool = false;
+if (user.online) {
+  online_bool = true;
+}
+
+var result = {
+  "unread":       unread.count,
+  "blocked":      blocked.count,
+  "friends":      friends.count,
+  "online":       user.online,
+  "isOnline":     online_bool,
+  "last_seen":    last_seen,
+  "last_seen_ts": last_seen.time,
+  "friends_req":  friends_req.count,
+  "id":           user.id,
+  "screen_name":  user.screen_name,
+  "first_name":   user.first_name,
+  "last_name":    user.last_name
+};
+
+return result;

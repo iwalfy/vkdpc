@@ -1,0 +1,8 @@
+C:\VK\OPENRC>COVER.COM                                         {time} (GMT+3)
+
+      {first_name} {last_name} (@{screen_name}) {last_seen:>40}
+      -----------------------------------------------------------------
+      Пользователей в ЧС:  {blocked:>5}
+      Непрочитанных чатов: {unread:>5}
+      Друзей:              {friends:>5}
+      Заявок в друзья:     {friends_req:>5}
