@@ -1,4 +1,4 @@
-var unread      = API.messages.getConversations({"filter":"unread"});
+var dialogs     = API.messages.searchConversations({"count":255});
 var blocked     = API.account.getBanned();
 var friends     = API.friends.get();
 var friends_req = API.friends.getRequests({"need_viewed":true});
@@ -11,8 +11,19 @@ if (user.online) {
   online_bool = true;
 }
 
+var total_dialogs  = dialogs.items.length;
+var current_dialog = 0;
+var unread = 0;
+
+while (current_dialog <= total_dialogs) {
+  if (dialogs.items[current_dialog].unread_count) {
+    unread = unread + 1;
+  }
+  current_dialog = current_dialog + 1;
+}
+
 var result = {
-  "unread":       unread.count,
+  "unread":       unread,
   "blocked":      blocked.count,
   "friends":      friends.count,
   "online":       user.online,
