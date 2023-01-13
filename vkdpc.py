@@ -62,7 +62,7 @@ def genCoverText(api):
   print(text)
   return text
 
-def uploadCover(api, imageFile) {
+def uploadCover(api, imageFile):
   # Get image upload server URL
   params = {
     "crop_height": COVER_HEIGHT,
@@ -73,7 +73,7 @@ def uploadCover(api, imageFile) {
   print(resp)
 
   # Upload image to server
-  files = { "file": open("cover.jpg", "rb") }
+  files = { "file": open(imageFile, "rb") }
   resp = requests.post(upload_url, files=files)
   upload_result = resp.json()
   print(upload_result)
@@ -85,7 +85,6 @@ def uploadCover(api, imageFile) {
   params = { "hash": hash, "photo": photo }
   resp = api.method("photos.saveOwnerCoverPhoto", params)
   print(resp)
-}
 
 def main():
   f = open("token.txt", "r")
