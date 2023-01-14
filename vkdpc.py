@@ -4,7 +4,7 @@
 import time
 import sys
 import requests
-from picoVkApi import VkApi
+from picoVkApi import VkApi, VkApiError
 from PIL import Image, ImageDraw, ImageFont
 
 COVER_WIDTH  = 1920
@@ -105,7 +105,18 @@ def main():
     cover_image.show()
     exit()
 
-  uploadCover(api, "cover.jpg")
+  attempts = 0
+  while attempts < 3:
+    try:
+      uploadCover(api, "cover.jpg")
+      break
+    except VkApiError as e:
+      attempts += 1
+      print(e)
+      print("Failed to upload cover")
+    except Exception as e:
+      print(e)
+      break
 
 if __name__ == "__main__":
   main()
